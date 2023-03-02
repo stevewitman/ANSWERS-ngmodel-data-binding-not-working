@@ -45,4 +45,4 @@ I added two things to get a working example ...
 type="button">Search</button>
 ```
 
-2. I added imported `FormsModule` and added it to the  imports array in `app/module.ts`.
+2. I added imported `FormsModule` and added it to the  imports array in `app.module.ts`.
