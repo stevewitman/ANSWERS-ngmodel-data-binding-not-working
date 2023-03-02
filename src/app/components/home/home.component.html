@@ -1,0 +1,11 @@
+<input type="text" class="border search-input"  
+[(ngModel)]="searchText"     
+(keyup)="checkKeyPress($event)"    
+(input)="clearWhenEmpty()"  />
+
+<button class="btn  btn-search text-white" (click)="doSearch()"     
+[disabled]="searchText.length < 1"    
+type="button">Search</button>
+
+<p>Search Text: {{ searchText }}</p>
+<p>Search Text Length: {{ searchText.length }}</p>

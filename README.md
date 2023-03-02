@@ -1,27 +1,46 @@
-# Ngmodel
+# QUESTION: (asked on AngularNation.net)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+##Help needed for an ngModel issue
 
-## Development server
+Hi, I'm having a very weird bug with an Angular 15 app. I have a text file that is using  [(ngModel)] to set the value of the field to a property, something like this [(ngModel)]="searchText" and the search text property is defined like this `searchText='';`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Now all I want to do is see if the search text has a length and if greater than 1, enable a button. Like this:
 
-## Code scaffolding
+```ts
+searchText = '';
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```html
+<button class="btn  btn-search text-white" (click)="doSearch()"     
+[disabled]="searchText.length < 1"    
+type="button">
+```
 
-## Build
+This is my input field:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```html
+<input type="text" class="border search-input"  
+[(ngModel)]="searchText"     
+(keyup)="checkKeyPress($event)"    
+(input)="clearWhenEmpty()"  />
+```
 
-## Running unit tests
+This did work before an upgrade to Angular 15 from 13, but I can't see why this doesn't now work. I know I could make the button enabled, but I'd like to know why the ngModel is not working. If I try to output the searchText in the template like this {{searchText}} in the component Html, I still don't see the value of the input field when it changes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+It looks to me that the data binding is not working for some reason, but I'm not sure.
 
-## Running end-to-end tests
+# ANSWER: 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+In this repo, I have the code you provided.
 
-## Further help
+I added two things to get a working example ...
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Closed the button tag with ...`Search</button>`
+
+```html
+<button class="btn  btn-search text-white" (click)="doSearch()"     
+[disabled]="searchText.length < 1"    
+type="button">Search</button>
+```
+
+2. I added imported `FormsModule` and added it to the  imports array in `app/module.ts`.
