@@ -1,5 +1,7 @@
 # QUESTION: (asked on AngularNation.net)
 
+https://www.angularnation.net/posts/33183820
+
 ##Help needed for an ngModel issue
 
 Hi, I'm having a very weird bug with an Angular 15 app. I have a text file that is using  [(ngModel)] to set the value of the field to a property, something like this [(ngModel)]="searchText" and the search text property is defined like this `searchText='';`
